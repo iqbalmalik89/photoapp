@@ -1,0 +1,184 @@
+
+
+{% extends "base.html.twig" %}
+
+{% block title %}{{title}}{% endblock %}
+{% block bodyclass %}{{''}}{% endblock %}
+
+
+
+{% block content %}
+
+<!-- Page Header -->
+	<header class="titlebar titlebar1">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="page-title pull-left">Contact us</h1>
+					<ol class="breadcrumb pull-right">
+						<li><a href="index">Home</a></li>
+						<li class="active">Contact</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</header> <!-- END Page Header -->
+
+
+{# 	<section class="section large-padding page-contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 sm-box2">
+					<h3 class="box-title mt0">About us</h3>
+					<p class="mb40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit quae, nam nobis animi blanditiis soluta iure mollitia dolorum officiis quas non quasi unde cupiditate eos numquam repudiandae excepturi, optio consequatur dolorum ispusm consectetur.</p>
+					<h3 class="box-title mt0">Headquarters</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit quae, nam nobis animi blanditiis soluta.</p>
+					<p>
+						<a href="#" class="btn btn-bg bg-dark wide">London</a>
+						<a href="#" class="btn btn-bg bg-dark boxed">Dublin</a>
+						<a href="#" class="btn btn-bg bg-dark boxed">Los Angeles</a>
+					</p>
+				</div>
+				<div class="col-md-8">
+					<iframe src="https://maps.google.com/?ie=UTF8&amp;ll=34.053477,-118.241086&amp;spn=0.031112,0.038581&amp;t=m&amp;z=15&amp;output=embed"></iframe>
+				</div>
+			</div>
+		</div>
+	</section> #}
+
+
+	<section class="contact-section section-3 m0 large-padding custom-bg parallax" data-bg="asset/images/demo/s-201.jpg">
+		<div class="bg-layer"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-5 sm-box">
+					<h2 class="section-title st2 text-left mt10 mb25">Get in touch with us</h2>
+					<p class="contact-p">Thank you for your interest in Dyconsol. Please provide the following information about your business needs to help us serve you better. This information will enable us to route your request to the appropriate person.</p>
+					<address class="mb50">
+{# 						<p><i class="fa fa-map-marker"></i>  1800 Los Angeles, USA</p>
+						<p><i class="fa fa-phone"></i>  0 800-55-22-55</p>
+						<p><i class="fa fa-envelope"></i> support@abusinesstheme.com</p> #}
+
+
+					<blockquote class="blockquote-1" style="opacity:0.6;">
+						<address style="opacity:1 !important; color:#000">
+						    <strong>Karachi Office</strong><br>
+						    Sea Breeze Plaza,   Unit # 203, <br>
+						    Shara-e-Faisal, Karachi, Sindh <br>
+						    <i class="fa fa-phone"></i> +92-21-2782315, 32782321 <br>
+{# 						    <i class="fa fa-envelope"></i>  info@dyconsol.com  #}
+						</address>
+					</blockquote>
+
+					<blockquote class="blockquote-1" style="opacity:0.6;">
+						<address style="opacity:1 !important; color:#000">
+						    <strong>Quetta Office</strong><br>
+						    7-15/20 Shahrah-e-Alamdar, <br>
+						    Quetta, Pakistan <br>
+{# 						    <i class="fa fa-envelope"></i>  info@dyconsol.com  #}
+						</address>
+					</blockquote>
+
+					<p><i class="fa fa-envelope"></i><a href="mailto:info@dyconsol.com?Subject=Contact%20Query" target="_top">info@dyconsol.com</a></p> 
+
+					</address>
+					<ul class="nav nav-tabs">
+					  	<li class="active"><a href="#tab-contact" data-toggle="tab">Contact us</a></li>
+					 	<li><a href="#tab-subscribe" data-toggle="tab">Subscribe</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-12 col-md-6 col-md-offset-1">
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="tab-contact">
+							<!-- Working contact form -->
+							<form class="working-contact-form form" method="post" action="php/contact.php" onsubmit="return false;">
+								<!-- Success and error Alerts -->
+
+
+						<div class="alert alert-success alert-dismissable" style="display:none; padding-top:3px;padding-bottom:3px;" id="contact-success">
+							
+						</div>
+
+
+
+								<!-- Form Fields -->
+								<form onsubmit = "return false" >
+								<div>
+									<div class="form-group">
+										<div class="form-icon icon-user">
+					 						<input name="name" required onkeypress="$(this).parent().removeClass('has-error')" id="name" type="text" class="form-control" placeholder="Name">
+					 					</div>
+									</div>
+									<div class="form-group">
+										<div class="form-icon icon-email">
+					 						<input name="email" id="email" type="email" required class="form-control" placeholder="Email">
+					 					</div>
+									</div>
+									<div class="form-group">
+										<div class="form-icon icon-mobile">
+					 						<input name="phone_number" id="phone_number"  required type="text" class="form-control" placeholder="Phone Number">
+					 					</div>
+									</div>
+									<div class="form-group">
+										<div class="form-icon icon-message">
+					 						<textarea name="desc" id="desc" cols="30"  required rows="8" class="form-control" placeholder="Description"></textarea>
+					 					</div>
+									</div>
+									<div class="form-group" style="opacity:.5;">
+										<div class="form-icon icon-message">
+					 						<select id="country" cols="30"  required rows="8" class="form-control" >
+
+					 								<option value="Pakistan">Pakistan</option>
+													<option value="Canada">Canada</option>
+													<option value="England">England</option>
+													<option value="Germany">Germany</option>
+													<option value="China">China</option>
+													<option value="USA">USA</option>
+													<option value="Austrailia">Austrailia</option>
+													<option value="India">India</option>
+													<option value="Other">Other</option>
+													
+					 						</select>
+					 					</div>
+									</div>
+									<div class="form-group">
+										<div class="form-icon icon-mobile">
+					 						<input name="security" id="security_question"  required type="text" class="form-control" placeholder="Security 2+1=">
+					 					</div>
+									</div>
+							 		<input type="submit" onclick="contactUs();" value="Submit">
+						 		</div> <!-- END Form Fields -->
+							</form>
+					  	</div>
+					  	<div class="tab-pane fade" id="tab-subscribe">
+
+						<div class="alert alert-success alert-dismissable" style="display:none; padding-top:3px;padding-bottom:3px;" id="subscriber-success">
+								
+						</div>
+
+						<div class="alert alert-danger alert-dismissable" style="display:none; padding-top:3px;padding-bottom:3px;" id="subscriber-error">
+								
+						</div>
+
+					  		<!-- Subscribe form -->
+					  		<form action="#" class="form form-subscribe" onsubmit="return false;">
+					  			<div class="row">
+					  				<div class="col-sm-9">
+					  					<div class="form-group">
+						 					<input name="subscriber_email" id="subscriber_email" type="text" class="form-control" placeholder="Email">
+										</div>
+					  				</div>
+					  				<div class="col-sm-3">
+					  					<input type="submit" value="Subscribe" onclick = "subscribe();">
+					  				</div>
+					  			</div>
+					  		</form>
+					  		<h3 class="box-title mt40">Why subscribe? And don't worry. No spam!</h3>
+					  		<p class="contact-p"></p>
+					 	</div>
+					</div>
+				</div>
+			</div>
+		</div> <!-- END Container -->
+	</section> 
+{% endblock %}
