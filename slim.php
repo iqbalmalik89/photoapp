@@ -45,7 +45,7 @@ function response($code, $dataAry)
 }
 
     $globalWebUrl = UtilityRepo::getRootPath(false);
-    $viewParameters = ['web_url' => $globalWebUrl];
+    $viewParameters = array('web_url' => $globalWebUrl);
 
 	$jsonParams = array();
 	$formParams = $app->request->params();
@@ -423,7 +423,11 @@ $app->group('/api', function () use ($app) {
 
      $app->post('/portfolio_upload', function() use ($app){
         $image = new Image();
-        $resp = $image->uploadTmp($_FILES['image'], 'portfolio');
+        if(isset($_FILES['image']))
+            $file = $_FILES['image'];
+        else
+            $file = $_FILES['image_after'];            
+        $resp = $image->uploadTmp($file, 'portfolio');
         response($resp['code'], $resp);
     }); 
 

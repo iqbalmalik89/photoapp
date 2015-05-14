@@ -19,6 +19,7 @@ class PortfolioRepo{
 					foreach($exists as $portfolio)
 			    	{
 			    		$portfolio['web_url'] = UtilityRepo::getRootPath(false).'data/portfolio/'.$portfolio['image'];			    		
+			    		$portfolio['web_url_after'] = UtilityRepo::getRootPath(false).'data/portfolio/after'.$portfolio['image'];			    		
 						$data[] = $portfolio;
 
 					}
@@ -34,19 +35,24 @@ class PortfolioRepo{
 			
 			else
 			{
+
 				if(isset($request['status']))
 				{
-					$exists = $GLOBALS['con']->from('portfolio')->where('`status`' , $request['status']);
+ 					$exists = $GLOBALS['con']->from('portfolio')->where('portfolio_type', $requestData);
 				}
 				else
-					$exists = $GLOBALS['con']->from('portfolio');
+					$exists = $GLOBALS['con']->from('portfolio')->where('portfolio_type', $requestData);;
 					$data = array();
 
-				foreach($exists as $portfolio)
-		    	{
-		    		$portfolio['web_url'] = UtilityRepo::getRootPath(false).'data/portfolio/'.$portfolio['image'];
-					$data[] = $portfolio;
+				if(!empty($exists))
+				{
+					foreach($exists as $portfolio)
+			    	{
+			    		$portfolio['web_url'] = UtilityRepo::getRootPath(false).'data/portfolio/'.$portfolio['image'];
+			    		$portfolio['web_url_after'] = UtilityRepo::getRootPath(false).'data/portfolio/after'.$portfolio['image'];			    		
 
+						$data[] = $portfolio;
+					}					
 				}
 
 				$response = 200;
@@ -67,6 +73,22 @@ class PortfolioRepo{
 			$exists = $GLOBALS['con']->from('portfolio')->where('id',$id)->count();
 			if($exists)
 			{
+				$rows = $GLOBALS['con']->from('portfolio')->where('id',$id);
+				if(!empty($rows))
+				{
+					foreach ($rows as $row) {
+						$image = UtilityRepo::getRootPath(true).'data/portfolio/'.$row['image'];
+						$afterImagemage = UtilityRepo::getRootPath(true).'data/portfolio/after'.$row['image'];
+						if(file_exists($image))
+						{
+							unlink($image);
+						}
+						if(file_exists($afterImagemage))
+						{
+							unlink($afterImagemage);
+						}
+					}
+				}
 				$query = $GLOBALS['con']->deleteFrom('portfolio')->where('id', $id)->execute();
 				$response = 200;
 			}
@@ -88,7 +110,14 @@ class PortfolioRepo{
 		$response = 400;
 		if(!empty($request))
 		{
-			$values = array('name' => $request['name'],'image' => $request['image'], '`desc`' => $request['desc'], '`status`' => $request['status']);
+			$values = array('name' => $request['name'],'portfolio_type' => $request['portfolio_type'],'image' => $request['image'], '`desc`' => $request['desc'], '`status`' => $request['status']);
+			if($request['portfolio_type'] == 'beforeafter')
+			{
+				if(file_exists(UtilityRepo::getRootPath(true).'data/portfolio/'.$request['image_after']))
+				{
+					rename(UtilityRepo::getRootPath(true).'data/portfolio/'.$request['image_after'], UtilityRepo::getRootPath(true).'data/portfolio/after'.$request['image']);
+				}
+			}
 			$query = $GLOBALS['con']->insertInto('portfolio', $values)->execute();
 
 
@@ -115,6 +144,16 @@ class PortfolioRepo{
 			if($count > 0)
 			{
 				$values = array('name' => $request['name'], 'image' => $request['image'], '`desc`' => $request['desc'], '`status`' => $request['status']);
+
+			if($request['portfolio_type'] == 'beforeafter')
+			{
+				if(file_exists(UtilityRepo::getRootPath(true).'data/portfolio/'.$request['image_after']))
+				{
+					rename(UtilityRepo::getRootPath(true).'data/portfolio/'.$request['image_after'], UtilityRepo::getRootPath(true).'data/portfolio/after'.$request['image']);
+				}
+			}
+
+
 			$query = $GLOBALS['con']->update('portfolio', $values, $request['id'])->execute();
 
 				$response = 200;

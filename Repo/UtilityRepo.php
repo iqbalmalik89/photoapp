@@ -10,16 +10,16 @@ class UtilityRepo{
  		if($_SERVER['HTTP_HOST'] == 'localhost')
  		{
  			if($root)
-		 		$dir = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'businessapp'.DIRECTORY_SEPARATOR.'bd'.DIRECTORY_SEPARATOR;
+		 		$dir = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'photoapp'.DIRECTORY_SEPARATOR;
 		 	else
 		 		$dir = 'http://'.$_SERVER['HTTP_HOST'].'/photoapp/';
  		}
  		else
  		{
  			if($root)
-		 		$dir = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'beta'.DIRECTORY_SEPARATOR;
+		 		$dir = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'photoapp'.DIRECTORY_SEPARATOR;
 		 	else
-		 		$dir = 'http://'.$_SERVER['HTTP_HOST'].'/beta/';
+		 		$dir = 'http://'.$_SERVER['HTTP_HOST'].'/photoapp/';
  		}
 
  		return $dir;

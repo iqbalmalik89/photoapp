@@ -1,7 +1,7 @@
   <div id="nav"> 
     <!--logo start-->
     <div class="profile">
-      <div class="logo"><a href=""><img src="images/logo.png" alt=""></a></div>
+      <div class="logo"><a href=""><img style="width:100px;" src="images/logo.png" alt=""></a></div>
     </div><!--logo end--> 
     
     <!--navigation start-->
@@ -11,10 +11,40 @@
  -->
 <?php
   $currFile = basename($_SERVER['PHP_SELF']); 
+  if(isset($_GET['type']))
+  {
+    $globalType = $_GET['type'];
+    if($globalType == 'portfolio1')
+    {
+      $globalTitle = 'Portfolio 1';
+      $globalType = 'portfolio1';
+    }
+    else if($globalType == 'portfolio2')
+    {
+      $globalTitle = 'Portfolio 2';
+      $globalType = 'portfolio2';
+    }    
+    else if($globalType == 'personal')
+    {
+      $globalTitle = 'Personal';
+      $globalType = 'personal';
+    }        
+    else if($globalType == 'beforeafter')
+    {
+      $globalTitle = 'Before / After';
+      $globalType = 'beforeafter';
+    }            
+  }
+  else
+    $globalType = 'portfolio1';
+
  ?>
 
- <li class="sub"> <a <?php if($currFile == 'portfolio.php' ) echo 'class="active"'; ?> href="portfolio.php"><i class="fa fa-sitemap"></i><span>Portfolio</span></a>
- 
+ <li class="sub"> <a <?php if($globalType == 'portfolio1' ) echo 'class="active"'; ?> href="portfolio.php?type=portfolio1"><i class="fa fa-sitemap"></i><span>Portfolio 1</span></a>
+ <li class="sub"> <a <?php if($globalType == 'portfolio2' ) echo 'class="active"'; ?> href="portfolio.php?type=portfolio2"><i class="fa fa-sitemap"></i><span>Portfolio 2</span></a> 
+ <li class="sub"> <a <?php if($globalType == 'personal' ) echo 'class="active"'; ?> href="portfolio.php?type=personal"><i class="fa fa-sitemap"></i><span>Personal</span></a> 
+ <li class="sub"> <a <?php if($globalType == 'beforeafter' ) echo 'class="active"'; ?> href="portfolio.php?type=beforeafter"><i class="fa fa-sitemap"></i><span>Before / Afer</span></a> 
+
 <?php /*
 <!-- <li class="sub"> <a <?php if($currFile == 'vendors.php' ||  $currFile == 'vendordeals.php' ||  $currFile == 'editvendor.php') echo 'class="active"'; ?> href="vendors.php"><i class="fa fa-briefcase"></i><span>Vendors</span></a>
 <li class="sub"> <a <?php if($currFile == 'events.php' || $currFile == 'editevent.php') echo 'class="active"'; ?> href="events.php"><i class="fa fa-calendar-o"></i><span>Events</span></a>

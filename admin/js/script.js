@@ -50,7 +50,7 @@ function login()
             if(data.status == 'success')
             {
                 showMsg('#msg', 'Successfully Logged In. Redirecting ...', 'green')
-                window.location = 'portfolio.php';
+                window.location = 'portfolio.php?type=portfolio1';
             }
           },
           error:function(jqxhr){
@@ -1154,7 +1154,7 @@ function testimonialReset()
 /***************************************************************************************/
 // Photo App //
 
-function getPortfolio()
+function getPortfolio(portfolio_type)
 {
   // if(edit)
   //   sync = false;
@@ -1164,7 +1164,7 @@ function getPortfolio()
       type: 'GET',
       url: apiUrl + 'portfolio',
       dataType : "JSON",
-      data: {},
+      data: {portfolio_type:portfolio_type},
       //async:sync,
       beforeSend:function(){
 
@@ -1182,9 +1182,13 @@ function getPortfolio()
               //   var status = '<i class="fa fa-check-circle"></i> ';
 
                 //options += '<option value="'+value.id+'">'+value.name+' </option>';
+                if(value.portfolio_type == 'beforeafter')
+                  var afterStr = '<a target="_blank" href="'+value.web_url_after+'"><img width="150" height="75" src="'+value.web_url_after+'"></a>';
+                else
+                  var afterStr = '';
                 html += '<tr>\
                             <td>'+value.name+'</td>\
-                            <td><img width="150" height="75" src="'+value.web_url+'"></td>\
+                            <td><a target="_blank" href="'+value.web_url+'"><img width="150" height="75" src="'+value.web_url+'"> </a>'+afterStr+'</td>\
                             <td>'+value.desc+'</td>\
                             <td>'+value.status+'</td>\
                             <td><a href="javascript:void(0);" data-toggle="modal"  onclick="getSinglePortfolio('+value.id+');" data-target="#addportfolio">Edit</a> |<a href="javascript:void(0);" onclick="deletePortfolio('+value.id+');">Delete</a></td>\
@@ -1213,6 +1217,7 @@ function getPortfolio()
 
 function deletePortfolio(id)
 {
+    var portfolio_type            = $('#portfolio_type').val();  
     $.ajax({
       type: 'POST',
       url: apiUrl + 'deleteportfolio',
@@ -1223,7 +1228,7 @@ function deletePortfolio(id)
       },
       success:function(data){
         showMsg('#jobmsg', 'Portfolio deleted successfully.', 'green');
-        getPortfolio();
+        getPortfolio(portfolio_type);
       },
       error:function(jqxhr){
       }
@@ -1232,6 +1237,7 @@ function deletePortfolio(id)
 
 function getSinglePortfolio(id)
 {
+    var portfolio_type            = $('#portfolio_type').val();  
     $('#portfolio_id').val(id);
 
     portfolioReset();  
@@ -1253,6 +1259,11 @@ function getSinglePortfolio(id)
         $('#status').val(data.data[0].status);
         $('#temp_pic').attr('src', data.data[0].web_url);
 
+        if(data.data[0].portfolio_type == 'beforeafter')
+        {
+          $('#temp_pic_after').attr('src', data.data[0].web_url_after);
+          $('#image_path_after').val('after' + data.data[0].image);
+        }
       // $('#testimonial').val(data.data[0].testimonial);
 
 //   var editor =     $('#testimonial').data("wysihtml5").editor
@@ -1269,31 +1280,35 @@ function getSinglePortfolio(id)
 function addUpdatePortfolio()
 {
     var id            = $('#portfolio_id').val();
+    var portfolio_type            = $('#portfolio_type').val();
+
     var name          = $('#name').val();
     var desc          = $('#desc').val();
     var status        = $('#status').val();    
     var image         = $('#image_path').val();
+    var after_image         = $('#image_path_after').val();
+
     var check         = true;
     console.log(image);
 
-    if(name == '')
-    {
-        $('#name').focus();
-        $('#name').addClass('error-class');
-        check = false;
-    }
+
     if(image == '')
     {
         $('#image').focus();
         $('#image').addClass('error-class');
         check = false;
     }
-    if(desc == '')
+
+    if(portfolio_type == 'beforeafter')
     {
-        $('#desc').focus();
-        $('#desc').addClass('error-class');
-        check = false;
+      if(after_image == '')
+      {
+        $('#image_after').focus();
+        $('#image_after').addClass('error-class');
+        check = false;      
+       }
     }
+
     if(status == '')
     {
         $('#status').focus();
@@ -1310,7 +1325,7 @@ function addUpdatePortfolio()
                 type: 'POST',
                 url: apiUrl + 'portfolio',
                 dataType : "JSON",
-                data: {name:name, image:image,desc:desc, status:status},
+                data: {name:name, image:image,desc:desc, status:status,portfolio_type:portfolio_type, image_after:after_image},
                 beforeSend:function(){
 
                 },
@@ -1320,7 +1335,7 @@ function addUpdatePortfolio()
                   if(data.status == 'success')
                   {
                       showMsg('#jobmsg', 'Portfolio added successfully.', 'green');                    
-                      getPortfolio();
+                      getPortfolio(portfolio_type);
                       $('#addportfolio').modal('hide');
                   }
                 },
@@ -1337,7 +1352,7 @@ function addUpdatePortfolio()
                 type: 'POST',
                 url: apiUrl + 'editportfolio',
                 dataType : "JSON",
-                data: {id:id, name:name, image:image, desc:desc , status:status},
+                data: {id:id, name:name, image:image, desc:desc , status:status,portfolio_type:portfolio_type, image_after:after_image},
                 beforeSend:function(){
 
                 },
@@ -1347,7 +1362,7 @@ function addUpdatePortfolio()
                   if(data.status == 'success')
                   {
                       showMsg('#jobmsg', 'Portfolio updated successfully.', 'green');                    
-                      getPortfolio();                
+                      getPortfolio(portfolio_type);                
                       $('#addportfolio').modal('hide');
                   }
                 },
@@ -1369,9 +1384,9 @@ function portfolioReset()
 {
     $('#porttfolio_id').val('');
     $('#name').val('');
-    $('#image').val('');
-    $('#image_path').val('');
-    $('#temp_pic').attr('src', 'images/logoplaceholder.png');    
+    $('#image, #image_after').val('');
+    $('#image_path, #image_path_after').val('');
+    $('#temp_pic, #temp_pic_after').attr('src', 'images/logoplaceholder.png');    
     $('#status').val('Show');
     //$('#title').val('');
     // var editor =     $('#testimonial').data("wysihtml5").editor
