@@ -431,6 +431,38 @@ $app->group('/api', function () use ($app) {
         response($resp['code'], $resp);
     }); 
 
+     // Add Content
+      $app->post('/content', function() use ($app){
+
+        $new = new ContentRepo();
+        $code = $new->addContent($app->requestdata);
+        response($code, array());
+    }); 
+
+      // Edit Content
+      $app->post('/editcontent', function() use ($app){
+
+        $new = new ContentRepo();
+        $code = $new->editContent($app->requestdata);
+        response($code, array());
+    }); 
+
+// Get Content(s)
+     $app->get('/content', function() use ($app){
+
+        $new = new ContentRepo();
+        $code = $new->getContent($app->requestdata);
+        response($code['code'], array('data' => $code['data']));
+    });  
+
+// Delete Content
+     $app->post('/deletecontent', function() use ($app){
+
+        $new = new ContentRepo();
+        $code = $new->deleteContent($app->requestdata);
+        response($code, array());
+    });
+
 });
 
 

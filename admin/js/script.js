@@ -1392,3 +1392,187 @@ function portfolioReset()
     // var editor =     $('#testimonial').data("wysihtml5").editor
     // editor.setValue('', true);
 }
+
+
+function getContent()
+{
+  // if(edit)
+  //   sync = false;
+  // else
+  //   sync = true;
+    $.ajax({
+      type: 'GET',
+      url: apiUrl + 'content',
+      dataType : "JSON",
+      data: {},
+      //async:sync,
+      beforeSend:function(){
+
+      },
+      success:function(data){
+        var html = '';
+        var options = '';
+        if(data.data.length > 0)
+        {        
+
+            $.each(data.data, function( index, value ) {
+              // if(value.status == 0)
+              //   var status = '<i class="fa fa-times-circle"></i> ';
+              // else
+              //   var status = '<i class="fa fa-check-circle"></i> ';
+
+                //options += '<option value="'+value.id+'">'+value.name+' </option>';
+                html += '<tr>\
+                            <td>'+value.content+'</td>\
+                            <td><a href="javascript:void(0);" data-toggle="modal"  onclick="getSingleContent('+value.id+');" data-target="#addcontent">Edit</a> |<a href="javascript:void(0);" onclick="deleteContent('+value.id+');">Delete</a></td>\
+                         </tr>';
+
+            });            
+        }
+        else
+        { 
+            html += '<tr>\
+                        <td colspan="2" align="center">Content not found</td>\
+                     </tr>';            
+        }
+
+
+
+        $('#contentbody').html(html);
+       // $('#cat_id').append(options);
+
+      },
+      error:function(jqxhr){
+      }
+    });
+}
+
+
+function deleteContent(id)
+{
+    $.ajax({
+      type: 'POST',
+      url: apiUrl + 'deletecontent',
+      dataType : "JSON",
+      data: {id:id},
+      beforeSend:function(){
+
+      },
+      success:function(data){
+        showMsg('#jobmsg', 'Content deleted successfully.', 'green');
+        getContent();
+      },
+      error:function(jqxhr){
+      }
+    });
+}
+
+function getSingleContent(id)
+{
+    $('#content_id').val(id);
+
+    contentReset();  
+    $.ajax({
+      type: 'GET',
+      url: apiUrl + 'content',
+      dataType : "JSON",
+      data: {id:id},
+      beforeSend:function(){
+
+      },
+
+      success:function(data){
+        
+        $('#content_id').val(data.data[0].id);
+        $('#content').val(data.data[0].content);
+
+      },
+      error:function(jqxhr){
+      }
+    });
+
+}
+
+function addUpdateContent()
+{
+    var id            = $('#content_id').val();
+    var content       = $('#content').val();
+    var check         = true;
+
+    if(content == '')
+    {
+        $('#content').focus();
+        $('#content').addClass('error-class');
+        check = false;
+    }
+    
+
+    if(check)
+    {
+         if(id == '')
+          {          
+              $('#spinner').show();      
+              $.ajax({
+                type: 'POST',
+                url: apiUrl + 'content',
+                dataType : "JSON",
+                data: {content:content},
+                beforeSend:function(){
+
+                },
+                success:function(data){
+                $('#spinner').hide();   
+                $('#addcontent').modal('hide');
+                  if(data.status == 'success')
+                  {
+                      showMsg('#jobmsg', 'Content added successfully.', 'green');                    
+                      getContent();
+                      $('#addcontent').modal('hide');
+                  }
+                },
+                error:function(jqxhr){
+                  $('#spinner').hide();      
+                  showMsg('#msg', 'Content already exists with this name.', 'red');
+                }
+              });
+            }
+            else
+            {
+                $('#spinner').show();      
+              $.ajax({
+                type: 'POST',
+                url: apiUrl + 'editcontent',
+                dataType : "JSON",
+                data: {id:id, content:content},
+                beforeSend:function(){
+
+                },
+                success:function(data){
+                $('#addcontent').modal('hide');  
+                $('#spinner').hide();      
+                  if(data.status == 'success')
+                  {
+                      showMsg('#jobmsg', 'Content updated successfully.', 'green');                    
+                      getContent();                
+                      $('#addcontent').modal('hide');
+                  }
+                },
+                error:function(jqxhr){
+                  $('#spinner').hide();      
+                  showMsg('#jobmsg', 'Content already exists with this name.', 'red');
+                }
+              });
+            }
+    }
+}
+
+function showAddContentPopup()
+{
+    contentReset();
+}
+
+function contentReset()
+{
+    $('#content_id').val('');
+    $('#content').val('');
+}
