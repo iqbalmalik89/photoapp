@@ -12,9 +12,9 @@ class LoginRepo{
 		{
 			$rec = $GLOBALS['con']->from('admin')->where('username',$requestData['username'])->where('password',md5($requestData['password']));
 			$exists = count($rec);
-
 			if($exists)
 			{
+
 				$_SESSION['user'] = $rec->fetch();
 				$response = 200;
 			}
@@ -23,7 +23,6 @@ class LoginRepo{
 				$response =400;
 			}
 		}
-
 		return $response;
 	}
 

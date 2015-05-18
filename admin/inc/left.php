@@ -33,7 +33,8 @@
     {
       $globalTitle = 'Before / After';
       $globalType = 'beforeafter';
-    }            
+    }
+               
   }
   else
     $globalType = 'portfolio1';
@@ -44,6 +45,8 @@
  <li class="sub"> <a <?php if($globalType == 'portfolio2' ) echo 'class="active"'; ?> href="portfolio.php?type=portfolio2"><i class="fa fa-sitemap"></i><span>Portfolio 2</span></a> 
  <li class="sub"> <a <?php if($globalType == 'personal' ) echo 'class="active"'; ?> href="portfolio.php?type=personal"><i class="fa fa-sitemap"></i><span>Personal</span></a> 
  <li class="sub"> <a <?php if($globalType == 'beforeafter' ) echo 'class="active"'; ?> href="portfolio.php?type=beforeafter"><i class="fa fa-sitemap"></i><span>Before / Afer</span></a> 
+ <li class="sub"> <a <?php if($globalType == 'content' ) echo 'class="active"'; ?> href="content.php"><i class="fa fa-sitemap"></i><span>Content</span></a> 
+
 
 <?php /*
 <!-- <li class="sub"> <a <?php if($currFile == 'vendors.php' ||  $currFile == 'vendordeals.php' ||  $currFile == 'editvendor.php') echo 'class="active"'; ?> href="vendors.php"><i class="fa fa-briefcase"></i><span>Vendors</span></a>
