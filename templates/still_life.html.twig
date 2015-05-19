@@ -1,0 +1,204 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %}{{title}}{% endblock %}
+{% block bodyclass %}{{''}}{% endblock %}
+
+
+
+{% block content %}
+
+       <div style="clear:both"></div>
+      <!-- Start Advanced Gallery Html Containers -->
+      <div class="navigation-container">
+      {% if portfolios |length > 0 %}
+       {{portfolio.image}} 
+        <div id="thumbs" class="navigation"> <a class="pageLink prev" style="visibility: hidden;" href="#" title="Previous Page"></a>
+          <ul class="thumbs noscript">
+          
+				{% for portfolio in portfolios %}
+            <li> <a class="thumb" name="leaf" href="asset/images/gallery/01_big.jpg" title="Title #0"> <img src="data/portfolio/"{{portfolio.image}} alt="Title #0" /> </a> </li>
+            <!-- <li> <a class="thumb" name="leaf" href="images/gallery/02_big.jpg" title="Title #0"> <img src="images/gallery/02_small.jpg" alt="Title #0" /> </a> </li>
+            <li> <a class="thumb" name="leaf" href="images/gallery/03_big.jpg" title="Title #0"> <img src="images/gallery/03_small.jpg" alt="Title #0" /> </a> </li>
+            <li> <a class="thumb" name="leaf" href="images/gallery/04_big.jpg" title="Title #0"> <img src="images/gallery/04_small.jpg" alt="Title #0" /> </a> </li>
+            <li> <a class="thumb" href="http://farm4.static.flickr.com/3150/2538167224_0a6075dd18.jpg" title="Title #4"> <img src="http://farm4.static.flickr.com/3150/2538167224_0a6075dd18_s.jpg" alt="Title #4" /> </a> </li>
+            <li> <a class="thumb" href="http://farm4.static.flickr.com/3204/2537348699_bfd38bd9fd.jpg" title="Title #5"> <img src="http://farm4.static.flickr.com/3204/2537348699_bfd38bd9fd_s.jpg" alt="Title #5" /> </a> </li>
+            <li> <a class="thumb" href="http://farm4.static.flickr.com/3124/2538164582_b9d18f9d1b.jpg" title="Title #6"> <img src="http://farm4.static.flickr.com/3124/2538164582_b9d18f9d1b_s.jpg" alt="Title #6" /> </a> </li>
+            <li> <a class="thumb" href="http://farm4.static.flickr.com/3205/2538164270_4369bbdd23.jpg" title="Title #7"> <img src="http://farm4.static.flickr.com/3205/2538164270_4369bbdd23_s.jpg" alt="Title #7" /> </a> </li>
+            <li> <a class="thumb" href="http://farm4.static.flickr.com/3211/2538163540_c2026243d2.jpg" title="Title #8"> <img src="http://farm4.static.flickr.com/3211/2538163540_c2026243d2_s.jpg" alt="Title #8" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2315/2537343449_f933be8036.jpg" title="Title #9"> <img src="http://farm3.static.flickr.com/2315/2537343449_f933be8036_s.jpg" alt="Title #9" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2167/2082738157_436d1eb280.jpg" title="Title #10"> <img src="http://farm3.static.flickr.com/2167/2082738157_436d1eb280_s.jpg" alt="Title #10" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2342/2083508720_fa906f685e.jpg" title="Title #11"> <img src="http://farm3.static.flickr.com/2342/2083508720_fa906f685e_s.jpg" alt="Title #11" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2132/2082721339_4b06f6abba.jpg" title="Title #12"> <img src="http://farm3.static.flickr.com/2132/2082721339_4b06f6abba_s.jpg" alt="Title #12" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2139/2083503622_5b17f16a60.jpg" title="Title #13"> <img src="http://farm3.static.flickr.com/2139/2083503622_5b17f16a60_s.jpg" alt="Title #13" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2041/2083498578_114e117aab.jpg" title="Title #14"> <img src="http://farm3.static.flickr.com/2041/2083498578_114e117aab_s.jpg" alt="Title #14" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2149/2082705341_afcdda0663.jpg" title="Title #15"> <img src="http://farm3.static.flickr.com/2149/2082705341_afcdda0663_s.jpg" alt="Title #15" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2014/2083478274_26775114dc.jpg" title="Title #16"> <img src="http://farm3.static.flickr.com/2014/2083478274_26775114dc_s.jpg" alt="Title #16" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2194/2083464534_122e849241.jpg" title="Title #17"> <img src="http://farm3.static.flickr.com/2194/2083464534_122e849241_s.jpg" alt="Title #17" /> </a> </li>
+            <li> <a class="thumb" href="http://farm4.static.flickr.com/3127/2538173236_b704e7622e.jpg" title="Title #18"> <img src="http://farm4.static.flickr.com/3127/2538173236_b704e7622e_s.jpg" alt="Title #18" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2375/2538172432_3343a47341.jpg" title="Title #19"> <img src="http://farm3.static.flickr.com/2375/2538172432_3343a47341_s.jpg" alt="Title #19" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2353/2083476642_d00372b96f.jpg" title="Title #20"> <img src="http://farm3.static.flickr.com/2353/2083476642_d00372b96f_s.jpg" alt="Title #20" /> </a> </li>
+            <li> <a class="thumb" href="http://farm3.static.flickr.com/2201/1502907190_7b4a2a0e34.jpg" title="Title #21"> <img src="http://farm3.static.flickr.com/2201/1502907190_7b4a2a0e34_s.jpg" alt="Title #21" /> </a> </li>
+            <li> <a class="thumb" href="http://farm2.static.flickr.com/1116/1380178473_fc640e097a.jpg" title="Title #22"> <img src="http://farm2.static.flickr.com/1116/1380178473_fc640e097a_s.jpg" alt="Title #22" /> </a> </li>
+            <li> <a class="thumb" href="http://farm2.static.flickr.com/1260/930424599_e75865c0d6.jpg" title="Title #23"> <img src="http://farm2.static.flickr.com/1260/930424599_e75865c0d6_s.jpg" alt="Title #23" /> </a> </li> -->
+          {%endfor%}
+          </ul>
+          <a class="pageLink next" style="visibility: hidden;" href="#" title="Next Page"></a> </div>
+      </div>
+      {%endif%}
+     
+      <!-- End Gallery Html Containers -->
+   
+    </div>
+  </div>
+  <!--Vertical Tab-->
+</div>
+
+
+<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				// We only want these styles applied when javascript is enabled
+				$('div.content').css('display', 'block');
+
+				// Initially set opacity on thumbs and add
+				// additional styling for hover effect on thumbs
+				var onMouseOutOpacity = 0.67;
+				$('#thumbs ul.thumbs li, div.navigation a.pageLink').opacityrollover({
+					mouseOutOpacity:   onMouseOutOpacity,
+					mouseOverOpacity:  1.0,
+					fadeSpeed:         'fast',
+					exemptionSelector: '.selected'
+				});
+				
+				// Initialize Advanced Galleriffic Gallery
+				var gallery = $('#thumbs').galleriffic({
+					delay:                     2500,
+					numThumbs:                 9,
+					preloadAhead:              10,
+					enableTopPager:            false,
+					enableBottomPager:         false,
+					imageContainerSel:         '#slideshow',
+					controlsContainerSel:      '#controls',
+					captionContainerSel:       '#caption',
+					loadingContainerSel:       '#loading',
+					renderSSControls:          true,
+					renderNavControls:         true,
+					playLinkText:              'Play Slideshow',
+					pauseLinkText:             'Pause Slideshow',
+					prevLinkText:              '&lsaquo; Previous Photo',
+					nextLinkText:              'Next Photo &rsaquo;',
+					nextPageLinkText:          'Next &rsaquo;',
+					prevPageLinkText:          '&lsaquo; Prev',
+					enableHistory:             true,
+					autoStart:                 false,
+					syncTransitions:           true,
+					defaultTransitionDuration: 900,
+					onSlideChange:             function(prevIndex, nextIndex) {
+						// 'this' refers to the gallery, which is an extension of $('#thumbs')
+						this.find('ul.thumbs').children()
+							.eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end()
+							.eq(nextIndex).fadeTo('fast', 1.0);
+
+						// Update the photo index display
+						this.$captionContainer.find('div.photo-index')
+							.html('Photo '+ (nextIndex+1) +' of '+ this.data.length);
+					},
+					onPageTransitionOut:       function(callback) {
+						this.fadeTo('fast', 0.0, callback);
+					},
+					onPageTransitionIn:        function() {
+						var prevPageLink = this.find('a.prev').css('visibility', 'hidden');
+						var nextPageLink = this.find('a.next').css('visibility', 'hidden');
+						
+						// Show appropriate next / prev page links
+						if (this.displayedPage > 0)
+							prevPageLink.css('visibility', 'visible');
+
+						var lastPage = this.getNumPages() - 1;
+						if (this.displayedPage < lastPage)
+							nextPageLink.css('visibility', 'visible');
+
+						this.fadeTo('fast', 1.0);
+					}
+				});
+
+				/**************** Event handlers for custom next / prev page links **********************/
+
+				gallery.find('a.prev').click(function(e) {
+					gallery.previousPage();
+					e.preventDefault();
+				});
+
+				gallery.find('a.next').click(function(e) {
+					gallery.nextPage();
+					e.preventDefault();
+				});
+
+				/****************************************************************************************/
+
+				/**** Functions to support integration of galleriffic with the jquery.history plugin ****/
+
+				// PageLoad function
+				// This function is called when:
+				// 1. after calling $.historyInit();
+				// 2. after calling $.historyLoad();
+				// 3. after pushing "Go Back" button of a browser
+				function pageload(hash) {
+					// alert("pageload: " + hash);
+					// hash doesn't contain the first # character.
+					if(hash) {
+						$.galleriffic.gotoImage(hash);
+					} else {
+						gallery.gotoIndex(0);
+					}
+				}
+
+				// Initialize history plugin.
+				// The callback is called at once by present location.hash. 
+				$.historyInit(pageload, "advanced.html");
+
+				// set onlick event for buttons using the jQuery 1.3 live method
+				$("a[rel='history']").live('click', function(e) {
+					if (e.button != 0) return true;
+
+					var hash = this.href;
+					hash = hash.replace(/^.*#/, '');
+
+					// moves to a new page. 
+					// pageload is called at once. 
+					// hash don't contain "#", "?"
+					$.historyLoad(hash);
+
+					return false;
+				});
+				
+				
+				
+					/****************************************************************************************/
+				                    <!--motion POUP-->
+			    /****************************************************************************************/
+				$(".show_motion").click(function(){
+				$("#container").hide();
+	            $("#motion").show();
+				 
+                });	
+                $(".hide_motion").click(function(){
+	            $("#motion").hide();
+                });
+
+				/****************************************************************************************/
+				                    <!--CONTACT POUP-->
+			    /****************************************************************************************/
+				$(".show_contact").click(function(){
+	            $("#cont").show();
+                });	
+                $(".hide_contact").click(function(){
+	            $("#cont").hide();
+                });
+			    
+			
+				
+			
+			});
+		</script>
+{% endblock %}
