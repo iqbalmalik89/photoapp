@@ -155,6 +155,14 @@ function response($code, $dataAry)
         $app->render('clients.html.twig', $viewParameters);
     });
 
+    /*********************************************************/
+    $app->get('/gallery' , function () use ($app, $viewParameters){
+        $jobRepo = new PortfolioRepo();
+        $portfolios = $jobRepo->getPortfolio(array('status' => 'Show'));
+        $viewParameters['title'] = 'Portfolio';
+        $viewParameters['portfolio'] = $portfolios['data'];        
+        $app->render('still_life.html.twig', $viewParameters);
+    });
 
     $app->notFound(function () use ($app, $viewParameters) {
         $viewParameters['title'] = 'Not Found';        
