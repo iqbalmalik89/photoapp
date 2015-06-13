@@ -1,0 +1,137 @@
+       
+.right_section {
+  width: 800px;
+  float: right;
+}
+.ba-slider {
+  position: relative;
+  overflow: hidden;
+  margin-top: 25px;}
+ 
+.ba-slider img {
+    width: 100%;
+    display:block;
+}
+ 
+.ba-slider .resize {
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+}
+
+
+.ba-slider .handle { /* Thin line seperator */
+  position:absolute; 
+  left:50%;
+  top:0;
+  bottom:0;
+  width:4px;
+  margin-left:-2px;
+ 
+  background: rgba(0,0,0,.5);
+  cursor: ew-resize;
+}
+ 
+.ba-slider .handle:after {  /* Big orange knob  */
+    position: absolute;
+    top: 50%;
+    width: 64px;
+    height: 64px;
+    margin: -32px 0 0 -32px;
+ 
+    content:'\21d4';
+    color:white;
+    font-weight:bold;
+    font-size:36px;
+    text-align:center;
+    line-height:64px;
+ 
+    background: #ffb800; /* @orange */
+    border:1px solid #e6a600; /* darken(@orange, 5%) */
+    border-radius: 50%;
+    transition:all 0.3s ease;
+    box-shadow:
+      0 2px 6px rgba(0,0,0,.3), 
+      inset 0 2px 0 rgba(255,255,255,.5),
+      inset 0 60px 50px -30px #ffd466; /* lighten(@orange, 20%)*/ 
+}
+
+.ba-slider .handle.draggable:after {
+    width: 48px;
+    height: 48px;
+    margin: -24px 0 0 -24px;
+    line-height:50px;
+    font-size:30px;
+}
+/* Tiny Carousel */
+#slider1 {
+    height: 1%;
+    margin: 20px 0 0;
+    overflow: hidden;
+    position: relative;
+    padding: 0 50px 10px;
+}
+
+#slider1 .viewport {
+    height: 80px;
+    overflow: hidden;
+    position: relative;
+}
+
+#slider1 .buttons {
+     background: rgba(0, 0, 0, 0.5);
+  border-radius:5px 0px 0px 5px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 35px;
+  height: 36px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  line-height: 35px;
+  text-decoration: none;
+  font-size: 22px;
+  padding: 17px 0;
+  margin-top: -44px;
+
+}
+
+#slider1 .next {
+
+    right: 0;
+    left: auto;
+    top: 50%; border-radius:0px 5px 5px 0px;
+}
+
+#slider1 .buttons:hover {
+    color: #C01313;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+#slider1 .disable {
+    visibility: hidden;
+}
+
+#slider1 .overview {
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 100px;
+    left: 0;
+    top: 0;
+}
+
+#slider1 .overview li {
+    float: left;
+    margin: 0 14px 0 0;
+    padding: 1px;
+    height: 67px;
+/*    border: 1px solid #dcdcdc;*/
+    width: 100px;
+ }
